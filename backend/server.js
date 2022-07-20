@@ -22,4 +22,4 @@ mongoose
 const port = process.env.PORT || 8000;
 app.listen(port, () => console.log(`Server is listening to port ${port}...`));
 
-console.log((+new Date() * Math.random()).toString().substring(0, 3));
+console.log();
