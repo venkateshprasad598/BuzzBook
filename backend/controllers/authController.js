@@ -11,12 +11,16 @@ const signToken = (id) => {
   });
 };
 
-const createSendToken = (user, statusCode, res) => {
+const createSendToken = (user, statusCode, res, type) => {
   const token = signToken(user._id);
   console.log(token);
-  const url = `${process.env.BASE_URL}/activate/${token}`;
-  console.log({ url });
-  sendVerificationEmail(user.email, user.first_name, url);
+
+  if (type == "signUp") {
+    console.log({ type });
+    const url = `${process.env.BASE_URL}/activate/${token}`;
+    console.log({ url });
+    sendVerificationEmail(user.email, user.first_name, url);
+  }
 
   // const cookieOptions = {
   //   expires: new Date(
@@ -43,7 +47,7 @@ const signup = async (userData, res) => {
   try {
     console.log({ userData });
     const newUser = await User.create({ ...userData });
-    createSendToken(newUser, 201, res);
+    createSendToken(newUser, 201, res, "signUp");
   } catch (error) {
     console.log(error);
   }
@@ -97,4 +101,41 @@ exports.register = async (req, res) => {
     console.log(error);
     res.status(404).json({ message: error });
   }
+};
+
+exports.activate = async (req, res) => {
+  const { token } = req.body;
+  console.log({ token });
+  const verifyJWT = jwt.verify(token, process.env.JWT_SECRET);
+  console.log({ verifyJWT });
+  const check = await User.findById(verifyJWT.id);
+  console.log({ check });
+
+  if (check.verified) {
+    res.status(400).json({
+      status: "User has already been activated",
+    });
+  } else {
+    const activateUser = await User.findByIdAndUpdate(
+      { _id: verifyJWT.id },
+      { verified: true }
+    );
+    res.status(201).json({
+      status: "User has been activated successfully",
+    });
+  }
+};
+
+exports.login = async (req, res) => {
+  const { email, password } = req.body;
+
+  const user = await User.findOne({ email });
+
+  console.log({ user });
+  if (!user) {
+    return res
+      .status(201)
+      .json({ status: "Please register yourself first to login" });
+  }
+  createSendToken(user, 201, res, "login");
 };
