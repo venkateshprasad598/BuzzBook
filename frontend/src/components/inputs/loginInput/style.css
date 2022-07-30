@@ -3,7 +3,8 @@
   width: 320px;
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: flex-start;
+  margin-bottom: 10px;
 }
 
 .input_wrap input {
@@ -15,6 +16,15 @@
   font-size: 16px;
   border-radius: 10px;
   padding-left: 10px;
-  margin-bottom: 10px;
   color: var(--color-primary);
+}
+
+.input_error_border {
+  border: 1px solid red !important;
+}
+
+.input_error_text {
+  color: red;
+  font-size: 14px;
+  font-weight: 500;
 }

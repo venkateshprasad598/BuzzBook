@@ -13,16 +13,21 @@ const loginInfo = {
 const Login = () => {
   const [login, setLogin] = useState(loginInfo);
   const { email, password } = login;
+
   console.log(login);
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     console.log({ name, value });
-    setLogin({ ...loginInfo, [name]: value });
+    setLogin({ ...login, [name]: value });
   };
+
   const loginValidaton = Yup.object({
     email: Yup.string()
       .required("Email address is required")
-      .email("Must be a valid email"),
+      .email("Must be a valid email")
+      .max(100),
+    password: Yup.string().required("Password is required"),
   });
 
   return (
