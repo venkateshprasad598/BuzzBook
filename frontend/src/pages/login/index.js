@@ -35,7 +35,6 @@ const Login = () => {
       <div className="login_wrapper">
         <div className="login_wrap">
           <div className="login_1">
-            {/* <img src={require("../../")} /> */}
             <span>
               Buzz helps you connect and share with the people in your life
             </span>
@@ -79,8 +78,8 @@ const Login = () => {
               <button className="blue_btn open_signup">Create Account</button>
             </div>
             <Link to="/">
-              <b>Craete a page</b>
-              for a celebrity, brand and business.
+              <span>Not a member yet?</span> {""}{" "}
+              <span className="redirect_to_register_btn">Register</span>
             </Link>
           </div>
         </div>

@@ -18,13 +18,16 @@
   padding-left: 10px;
   color: var(--color-primary);
 }
-
+.input_wrap input:focus {
+  border: 1px solid var(--blue-color);
+}
 .input_error_border {
   border: 1px solid red !important;
 }
 
 .input_error_text {
   color: red;
-  font-size: 14px;
+  font-size: 13px;
   font-weight: 500;
+  margin-top: 2px;
 }
