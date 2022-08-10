@@ -1,7 +1,13 @@
 import React from "react";
+import Check from "../../components/Check";
 
 const Home = () => {
-  return <div>Home</div>;
+  return (
+    <>
+      <Check type="a" />
+      <Check type="b" />
+    </>
+  );
 };
 
 export default Home;

@@ -92,6 +92,9 @@
   cursor: pointer;
 }
 
+.sign_up_btn {
+  margin-top: 2rem;
+}
 /* MEDIA QUERIES */
 
 @media (min-width: 850px) {

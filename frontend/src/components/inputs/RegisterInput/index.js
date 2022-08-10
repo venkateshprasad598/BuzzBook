@@ -4,7 +4,6 @@ import { ErrorMessage, useField } from "formik";
 
 const RegisterInput = ({ placeholder, ...props }) => {
   const [field, meta] = useField(props);
-  console.log({ meta });
 
   return (
     <div className="input_wrap">
